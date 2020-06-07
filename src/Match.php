@@ -35,8 +35,7 @@ final class Match
 
     public function model(): ?Model
     {
-        $documentId = $this->document()->getId();
-        return $this->lazyModelFactory->makeById($documentId);
+        return $this->lazyModelFactory->hydrateFromDocument($this->document());
     }
 
     public function document(): Document

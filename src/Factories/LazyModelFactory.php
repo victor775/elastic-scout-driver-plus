@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ElasticScoutDriverPlus\Factories;
 
+use ElasticAdapter\Documents\Document;
 use ElasticAdapter\Search\Hit;
 use ElasticAdapter\Search\SearchResponse;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,6 +37,11 @@ class LazyModelFactory
         }
 
         return $this->models->get($id);
+    }
+
+    public function hydrateFromDocument(Document $document): Model
+    {
+        return $this->model->newFromBuilder($document->getContent());
     }
 
     private function mapModels(): Collection
